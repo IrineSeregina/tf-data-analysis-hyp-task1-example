@@ -20,6 +20,6 @@ def solution(x_success: int,
 
     P = (x_success + y_success) / (x_cnt + y_cnt)
     z_stat = (conversion_x - conversion_y) / np.sqrt(P * (1 - P) * (1. / x_cnt + 1. / y_cnt))
-    return norm.cdf(np.abs(z_stat)) < alpha
+    return norm.cdf(np.abs(z_stat)) <= alpha
     
     # Ваш ответ, True или False
