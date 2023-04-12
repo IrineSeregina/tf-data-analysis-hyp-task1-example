@@ -12,10 +12,14 @@ def solution(x_success: int,
     # Это будет вашим решением
     # Не меняйте название функции и её аргументы
     
+    alpha = 0.06    
     # конверсии в контроле и тесте соотв
-    conv_x = x_success / x_cnt 
-    conv_y = y_success / y_cnt
-    # uplift. считаем, что тест показал себя лучше. Если показывает себя лучше контроль, то ( conv_x / conv_y - 1 )
-    uplift = conv_y / conv_x - 1
+
+    conversion_x = x_success / x_cnt
+    conversion_y = y_success / y_cnt
+
+    P = (x_success + y_success) / (x_cnt + y_cnt)
+    z_stat = (conversion_x - conversion_y) / np.sqrt(P * (1 - P) * (1. / x_cnt + 1. / y_cnt))
+    return scipy.stats.norm.cdf(np.abs(z_stat)) < alpha
     
-    return ... # Ваш ответ, True или False
+    # Ваш ответ, True или False
